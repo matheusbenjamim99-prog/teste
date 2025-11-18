@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Novo Admin - Caminho do Nosso Lar</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        /* Estilos específicos para a página de formulário (baseado no card de login) */
+        .admin-layout {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main); 
+            padding: 20px;
+        }
+
+        .cadastro-card {
+            background-color: var(--bg-secondary);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 450px; /* Levemente maior que o card de login */
+            text-align: center;
+            border-top: 5px solid var(--color-secondary); /* Usa a cor secundária para diferenciar do login */
+        }
+
+        .cadastro-card h2 {
+            color: var(--color-secondary);
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .cadastro-card label {
+            display: block;
+            text-align: left;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-medium);
+        }
+
+        .cadastro-card input:not(.submit-btn),
+        .cadastro-card select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--color-border);
+            border-radius: 5px;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .cadastro-card input:focus,
+        .cadastro-card select:focus {
+            border-color: var(--color-secondary);
+            outline: none;
+        }
+        
+        /* Reutiliza o estilo do botão de Ação Principal, mas com uma classe diferente */
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1em;
+            background-color: var(--color-secondary); /* Verde Esmeralda */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .submit-btn:hover {
+            background-color: #008f7b; /* Cor ligeiramente mais escura ao passar o mouse */
+            transform: translateY(-1px);
+        }
+        
+        .back-to-login {
+            display: block;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: var(--color-primary);
+        }
+        
+    </style>
+    
+</head>
+<body class="admin-layout dark-mode"> 
+    
+    <div class="cadastro-card">
+        <h2><i class="fas fa-user-plus"></i> Cadastrar Usuário</h2>
+        
+        <form action="/admin/criar-usuario" method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="username">Login</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="submit-btn">Entrar</button>
+            
+            <a href="/accounts/register/" class="back-to-login">Registrar</a>
+            
+        </form>
+    </div>
+    
+</body>
+</html>

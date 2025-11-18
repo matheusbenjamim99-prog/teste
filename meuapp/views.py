@@ -2,10 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Cachorro
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'index.html')
 
+@login_required
 def project(request):
 
     # Captura os filtros enviados pelo <select>
@@ -29,9 +31,7 @@ def project(request):
 
     return render(request, "project.html", {"cachorro": cachorro})
 
-
-
-
+@login_required
 def sponsorship(request):
     cachorro = Cachorro.objects.all()
     
